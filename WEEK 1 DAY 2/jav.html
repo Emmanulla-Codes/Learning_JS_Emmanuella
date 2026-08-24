@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Number Guessing Game</title>
+    <style>
+        body{
+            font-family: Arial, Helvetica, sans-serif;
+            text-align: center;
+            padding: 50px;
+            background-color: #f0f0f0;
+        }
+        .game{
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 300px;
+            margin: auto;
+        }
+        input{
+            padding: 10px;
+            width: 100px;
+        }
+        button{
+            padding: 10px;
+            background: #4caf50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #message{
+            margin-top: 20px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+   <div class="game">
+    <h2>Guess the Number</h2>
+    <p>I'm thinking of a figure between 1 and 10</p>
+    <input type="number" id="guessinput" min="1" max="10">
+    <button onclick="checkGuess()">Guess</button>
+
+    <p id="message"></p>
+    <p id="attempts"></p>
+    <button onclick="new">N/ew Game</button>
+   </div>
+
+   <script>   
+let input = Number(document.getElementById('guessinput').value);
+let message = document.querySelector("#message");
+let attempt = document.querySelector("#attempts");
+let secret = Math.floor(Math.random()*10) + 1;
+attempt = 0;
+function checkGuess(){
+    const value = input;
+    const secretNumber = secret;
+if( value === secretNumber){
+ message.textContent = 'Valid';
+    //message.style.color = "green";
+}
+else if(value > secretNumber){
+message.textContent = 'Invalid, high';
+    //message.style.color = "yellow";
+}
+else if(value < secretNumber){
+    attempt++;
+ message.textContent = `Invalid, low. Attempts: ${attempt}`;
+    //message.style.color = "red";
+}}
+
+    // function checkGuess(userGuess) {
+    //     //0let 
+    //     userGuess = value;
+    //     //parseInt(document.getElementById('guessinput').value);
+       
+    //     let secretNumber = Math.floor(Math.random() * 10) + 1;
+    // let attempts = 0;
+    //       attempts++;
+    //     if(userGuess === secretNumber) {
+    //         //document.getElementById('message').innerText =
+    //              //' Correct! You got it.';
+    //         //document.getElementById('message').style.color = green;
+    //         document.body.style.backgroundColor = "green";
+    //         console.log("Correct");
+    //     }
+    //     else if (userGuess < secretNumber){
+    //         // document.getElementById('message').innerText = "Too LOW! Try again";
+    //         // document.getElementById('message').style.color = red;
+    //          document.body.style.backgroundColor = "red";
+    //         console.log("Invalid");
+    //     }
+    //     else if (userGuess > secretNumber){
+    //         // document.getElementById('message').innerText = "Too HIGH! Try again";
+    //         // document.getElementById('message').style.color = "red";
+    //          document.body.style.backgroundColor = "blue";
+    //         console.log("Invalid");
+    //     }
+    //     console.log(`[LOG]: Attempt${attempts}`);
+    //     // document.getElementById('attempts').innerText = 'attempts: $(attempts)';
+    //     // document.getElementById('guessinput').value = "";
+    // }
+
+    // function resetGame() {
+    //     secretNumber = Math.floor(Math.random() * 10) + 1;
+    //     attempts = 0;
+    //     // document.getElementById('message').innerText = "";
+    //     // document.getElementById('attempts').innerText = "Attempts: 0";
+    // }
+   </script>
+    
+</body>
+</html>

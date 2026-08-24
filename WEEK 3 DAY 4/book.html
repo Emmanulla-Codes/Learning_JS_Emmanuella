@@ -1,0 +1,155 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Address Book</title>
+    <style>
+        body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: auto;
+    background: white;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1, h2 {
+    text-align: center;
+}
+
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+input {
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    background: #007bff;
+    color: white;
+    cursor: pointer;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+.contact {
+    background: #f8f8f8;
+    padding: 15px;
+    margin-top: 10px;
+    border-radius: 8px;
+}
+
+.contact h3 {
+    margin-top: 0;
+}
+
+.delete-btn {
+    background: #dc3545;
+    margin-top: 10px;
+}
+
+.delete-btn:hover {
+    background: #a71d2a;
+}
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>📖 Address Book</h1>
+
+        <form id="contactForm">
+            <input type="text" id="name" placeholder="Full Name" required>
+            <input type="text" id="phone" placeholder="Phone Number" required>
+            <input type="email" id="email" placeholder="Email Address" required>
+            <input type="text" id="address" placeholder="Address" required>
+
+            <button type="submit">Add Contact</button>
+        </form>
+
+        <h2>My Contacts</h2>
+
+        <div id="contactList"></div>
+    </div>
+
+    <script>                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     name, price
+     // Array that stores all contacts
+let contacts = [];
+
+// Get the form and contact list
+const contactForm = document.getElementById("contactForm");
+const contactList = document.getElementById("contactList");
+
+// Add a new contact
+contactForm.addEventListener("submit", function(event) {
+    event.preventDefault();
+
+    // Create a contact object
+    const contact = {
+        name: document.getElementById("name").value,
+        phone: document.getElementById("phone").value,
+        email: document.getElementById("email").value,
+        address: document.getElementById("address").value
+    };
+
+    // Add object to the contacts array
+    contacts.push(contact);
+
+    // Display contacts
+    displayContacts();
+
+    // Clear the form
+    contactForm.reset();
+});
+
+// Display all contacts
+function displayContacts() {
+    contactList.innerHTML = "";
+
+    contacts.hj/forEach(function(contact, index) {
+        const contactDiv = document.createElement("div");
+
+        contactDiv.className = "contact";
+
+        contactDiv.innerHTML = `
+            <h3>${contact.name}</h3>
+            <p><strong>Phone:</strong> ${contact.phone}</p>
+            <p><strong>Email:</strong> ${contact.email}</p>
+            <p><strong>Address:</strong> ${contact.address}</p>
+
+            <button class="delete-btn" onclick="deleteContact(${index})">
+                Delete
+            </button>
+        `;
+
+        contactList.appendChild(contactDiv);
+    });
+}
+
+// Delete a contact
+function deleteContact(index) {
+    contacts.splice(index, 1);
+
+    displayContacts();
+}   
+    </script>
+</body>
+</html>

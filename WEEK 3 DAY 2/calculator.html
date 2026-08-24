@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Area Calculator</title>
+    <style>
+     * {
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background: #f2f2f2;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0;
+}
+
+.calculator {
+    background: white;
+    width: 350px;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+h1 {
+    text-align: center;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+select,
+input {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 8px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+#calculate {
+    background: #007bff;
+    color: white;
+}
+
+#reset {
+    background: #777;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.85;
+}
+
+#result {
+    text-align: center;
+    margin-top: 20px;
+}   
+    </style>
+</head>
+<body>
+
+    <div class="calculator">
+        <h1>Area Calculator</h1>
+
+        <label for="shape">Choose a shape:</label>
+        <select id="shape">
+            <option>Select a shape</option>
+            <option value="square">Square</option>
+            <option value="rectangle">Rectangle</option>
+            <option value="triangle">Triangle</option>
+            <option value="circle">Circle</option>
+            <option value="parallelogram">Parallelogram</option>
+            <option value="trapezium">Trapezium</option>
+        </select>
+
+        <div id="inputs"></div>
+
+        <button id="calculate">Calculate Area</button>
+        <button id="reset">Reset</button>
+         <h3 id="formula">Formula:</h3>
+        <h2 id="result">Area: 0</h2>
+
+        
+    </div>
+
+    <script>
+ const shape = document.getElementById("shape");
+const inputs = document.getElementById("inputs");
+const calculateButton = document.getElementById("calculate");
+const resetButton = document.getElementById("reset");
+const result = document.getElementById("result");
+
+// Create input fields
+function createInputs() {
+    const selectedShape = shape.value;
+
+    inputs.innerHTML = "";
+         
+    if (selectedShape === "square") {
+        inputs.innerHTML = `
+            <input type="number" id="side" placeholder="Enter side">
+        `;
+    }
+
+    else if (
+        selectedShape === "rectangle" ||
+        selectedShape === "parallelogram"
+    ) {
+        inputs.innerHTML = `
+            <input type="number" id="length" placeholder="Enter length">
+            <input type="number" id="width" placeholder="Enter width">
+        `;
+    }
+
+    else if (selectedShape === "triangle") {
+        inputs.innerHTML = `
+            <input type="number" id="base" placeholder="Enter base">
+            <input type="number" id="height" placeholder="Enter height">
+        `;
+    }
+
+    else if (selectedShape === "circle") {
+        inputs.innerHTML = `
+            <input type="number" id="radius" placeholder="Enter radius">
+        `;
+    }
+
+    else if (selectedShape === "trapezium") {
+        inputs.innerHTML = `
+            <input type="number" id="a" placeholder="Enter first base">
+            <input type="number" id="b" placeholder="Enter second base">
+            <input type="number" id="height" placeholder="Enter height">
+        `;
+    }
+}
+const formula = document.getElementById("formula");
+
+function showFormula() {
+    const selectedShape = shape.value;
+
+    if (selectedShape === "square") {
+        formula.textContent = "Formula: Area = side × side";
+    }
+
+    else if (selectedShape === "rectangle") {
+        formula.textContent = "Formula: Area = length × width";
+    }
+
+    else if (selectedShape === "triangle") {
+        formula.textContent = "Formula: Area = ½ × base × height";
+    }
+
+    else if (selectedShape === "circle") {
+        formula.textContent = "Formula: Area = π × radius²";
+    }
+
+    else if (selectedShape === "parallelogram") {
+        formula.textContent = "Formula: Area = base × height";
+    }
+
+    else if (selectedShape === "trapezium") {
+        formula.textContent = "Formula: Area = ½ × (a + b) × height";
+    }
+}
+shape.addEventListener("change", showFormula);
+showFormula();
+
+// Calculate area
+calculateButton.addEventListener("click", function () {
+
+    const selectedShape = shape.value;
+    let area;
+
+    if (selectedShape === "square") {
+        const side = Number(document.getElementById("side").value);
+        area = side * side;
+    }
+
+    else if (selectedShape === "rectangle") {
+        const length = Number(document.getElementById("length").value);
+        const width = Number(document.getElementById("width").value);
+        area = length * width;
+    }
+
+    else if (selectedShape === "triangle") {
+        const base = Number(document.getElementById("base").value);
+        const height = Number(document.getElementById("height").value);
+        area = 0.5 * base * height;
+    }
+
+    else if (selectedShape === "circle") {
+        const radius = Number(document.getElementById("radius").value);
+        area = Math.PI * radius * radius;
+    }
+
+    else if (selectedShape === "parallelogram") {
+        const length = Number(document.getElementById("length").value);
+        const width = Number(document.getElementById("width").value);
+        area = length * width;
+    }
+
+    else if (selectedShape === "trapezium") {
+        const a = Number(document.getElementById("a").value);
+        const b = Number(document.getElementById("b").value);
+        const height = Number(document.getElementById("height").value);
+
+        area = 0.5 * (a + b) * height;
+    }
+
+    if (isNaN(area)) {
+        result.textContent = "Please enter valid numbers";
+    } else {
+        result.textContent = `Area: ${area.toFixed(2)}cm² `;
+    }
+});
+
+
+// Change inputs when shape changes
+shape.addEventListener("change", createInputs);
+
+// Reset calculator
+resetButton.addEventListener("click", function () {
+    createInputs();
+    result.textContent = "Area: 0";
+    formula.textContent = "Formula: ";
+
+});
+
+// Load inputs when page opens
+createInputs();
+    </script>
+    
+</body>
+</html>
+

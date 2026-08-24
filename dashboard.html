@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CoreUI React.js Dashboard Clone</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Public+Sans:wght@300;400;500;600;700&display=swap');
+    body { font-family: 'Public Sans', sans-serif; background-color: #ebedef; }*/
+  </style>
+</head>
+<body class="flex min-h-screen text-slate-700">
+
+  <!-- Sidebar -->
+  <aside id="sidebar" class="w-64 bg-[#1e2229] text-slate-400 flex flex-col fixed inset-y-0 left-0 z-50 transform -translate-x-full md:translate-x-0 transition-transform duration-200 ease-in-out">
+    <div class="h-16 flex items-center px-6 bg-[#181b20] text-white font-bold text-lg border-b border-slate-800">
+      COREUI <span class="text-xs font-normal text-slate-400 ml-1">REACT.JS</span>
+    </div>
+    
+    <nav class="flex-1 px-3 py-4 overflow-y-auto space-y-1 text-sm">
+      <a href="#" class="flex items-center justify-between px-3 py-3 rounded text-white bg-slate-800 font-medium">
+        <div class="flex items-center"><i data-lucide="speedometer" class="w-4 h-4 mr-3"></i> Dashboard</div>
+        <span class="bg-blue-500 text-[10px] font-bold text-white px-1.5 py-0.5 rounded">NEW</span>
+      </a>
+COREUI
+
+      <div class="pt-4 pb-1 px-3 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Theme</div>
+      <a href="#" class="flex items-center px-3 py-2.5 rounded hover:bg-slate-800 hover:text-slate-200"><i data-lucide="droplet" class="w-4 h-4 mr-3"></i> Colors</a>
+      <a href="#" class="flex items-center px-3 py-2.5 rounded hover:bg-slate-800 hover:text-slate-200"><i data-lucide="type" class="w-4 h-4 mr-3"></i> Typography</a>
+
+      <div class="pt-4 pb-1 px-3 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Components</div>
+      <a href="#" class="flex items-center justify-between px-3 py-2.5 rounded hover:bg-slate-800 hover:text-slate-200">
+        <div class="flex items-center"><i data-lucide="puzzle" class="w-4 h-4 mr-3"></i> Base</div>
+        <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+      </a>
+      <a href="#" class="flex items-center justify-between px-3 py-2.5 rounded hover:bg-slate-800 hover:text-slate-200">
+        <div class="flex items-center"><i data-lucide="cursor" class="w-4 h-4 mr-3"></i> Buttons</div>
+        <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+      </a>
+      <a href="#" class="flex items-center justify-between px-3 py-2.5 rounded hover:bg-slate-800 hover:text-slate-200">
+        <div class="flex items-center"><i data-lucide="file-text" class="w-4 h-4 mr-3"></i> Forms</div>
+        <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+      </a>
+      <a href="#" class="flex items-center justify-between px-3 py-2.5 rounded hover:bg-slate-800 hover:text-slate-200">
+        <div class="flex items-center"><i data-lucide="pie-chart" class="w-4 h-4 mr-3"></i> Charts</div>
+      </a>
+      <a href="#" class="flex items-center justify-between px-3 py-2.5 rounded hover:bg-slate-800 hover:text-slate-200">
+        <div class="flex items-center"><i data-lucide="star" class="w-4 h-4 mr-3"></i> Icons</div>
+        <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+      </a>
+      <a href="#" class="flex items-center justify-between px-3 py-2.5 rounded hover:bg-slate-800 hover:text-slate-200">
+        <div class="flex items-center"><i data-lucide="bell" class="w-4 h-4 mr-3"></i> Notifications</div>
+        <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+      </a>
+      <a href="#" class="flex items-center justify-between px-3 py-2.5 rounded hover:bg-slate-800 hover:text-slate-200">
+        <div class="flex items-center"><i data-lucide="layout-grid" class="w-4 h-4 mr-3"></i> Widgets</div>
+        <span class="bg-blue-500 text-[10px] font-bold text-white px-1.5 py-0.5 rounded">NEW</span>
+      </a>
+
+      <div class="pt-4 pb-1 px-3 text-[11px] font-bold text-slate-500 uppercase tracking-wider">Extras</div>
+      <a href="#" class="flex items-center justify-between px-3 py-2.5 rounded hover:bg-slate-800 hover:text-slate-200">
+        <div class="flex items-center"><i data-lucide="star" class="w-4 h-4 mr-3"></i> Pages</div>
+        <i data-lucide="chevron-down" class="w-3.5 h-3.5"></i>
+      </a>
+      <a href="#" class="flex items-center px-3 py-2.5 rounded hover:bg-slate-800 hover:text-slate-200"><i data-lucide="file-description" class="w-4 h-4 mr-3"></i> Docs</a>
+    </nav>
+  </aside>
+
+  <!-- Main Container -->
+  <div class="flex-1 flex flex-col min-w-0 md:ml-64">
+    
+    <!-- Top Navbar -->
+    <header class="h-16 bg-white border-b border-slate-200 flex items-center justify-between px-4 md:px-6 sticky top-0 z-40">
+      <div class="flex items-center space-x-4">
+        <button id="menu-btn" class="p-1.5 rounded text-slate-500 hover:bg-slate-100 focus:outline-none">
+          <i data-lucide="menu" class="w-5 h-5"></i>
+        </button>
+        <nav class="hidden sm:flex space-x-4 text-sm font-medium text-slate-600">
+          <a href="#" class="hover:text-slate-900">Dashboard</a>
+          <a href="#" class="hover:text-slate-900">Users</a>
+          <a href="#" class="hover:text-slate-900">Settings</a>
+        </nav>
+      </div>
+      <div class="flex items-center space-x-4 text-slate-500">
+        <button class="hover:text-slate-700"><i data-lucide="bell" class="w-5 h-5"></i></button>
+        <button class="hover:text-slate-700"><i data-lucide="list" class="w-5 h-5"></i></button>
+        <button class="hover:text-slate-700"><i data-lucide="mail" class="w-5 h-5"></i></button>
+        <button class="hover:text-slate-700"><i data-lucide="sun" class="w-5 h-5"></i></button>
+        <div class="w-8 h-8 rounded-full overflow-hidden border">
+          <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=100&auto=format&fit=crop" alt="Avatar" class="w-full h-full object-cover">
+        </div>
+      </div>
+    </header>
+
+    <!-- Content Area -->
+    <main class="p-4 md:p-6 space-y-6">
+
+      <!-- Breadcrumbs -->
+      <nav class="text-xs text-slate-500">
+        <a href="#" class="text-blue-600 hover:underline">Home</a> / <span>Dashboard</span>
+      </nav>
+
+      <!-- 4 Stat Cards Top Grid -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        
+        <!-- Users Card -->
+        <div class="bg-[#5856d6] text-white rounded shadow-sm p-4 flex flex-col justify-between h-36">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="text-2xl font-bold">26K <span class="text-xs font-normal">(-12.4% ↓)</span></div>
+              <div class="text-sm opacity-80">Users</div>
+            </div>
+            <i data-lucide="more-vertical" class="w-4 h-4 opacity-70"></i>
+          </div>
+          <div class="h-12 w-full">
+            <canvas id="cardChart1"></canvas>
+          </div>
+        </div>
+
+        <!-- Income Card -->
+        <div class="bg-[#39f] text-white rounded shadow-sm p-4 flex flex-col justify-between h-36">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="text-2xl font-bold">$6.200 <span class="text-xs font-normal">(40.9% ↑)</span></div>
+              <div class="text-sm opacity-80">Income</div>
+            </div>
+            <i data-lucide="more-vertical" class="w-4 h-4 opacity-70"></i>
+          </div>
+          <div class="h-12 w-full">
+            <canvas id="cardChart2"></canvas>
+          </div>
+        </div>
+
+        <!-- Conversion Rate Card -->
+        <div class="bg-[#f9b115] text-white rounded shadow-sm p-4 flex flex-col justify-between h-36">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="text-2xl font-bold">2.49% <span class="text-xs font-normal">(84.7% ↑)</span></div>
+              <div class="text-sm opacity-80">Conversion Rate</div>
+            </div>
+            <i data-lucide="more-vertical" class="w-4 h-4 opacity-70"></i>
+          </div>
+          <div class="h-12 w-full">
+            <canvas id="cardChart3"></canvas>
+          </div>
+        </div>
+
+        <!-- Sessions Card -->
+        <div class="bg-[#e55353] text-white rounded shadow-sm p-4 flex flex-col justify-between h-36">
+          <div class="flex justify-between items-start">
+            <div>
+              <div class="text-2xl font-bold">44K <span class="text-xs font-normal">(-23.6% ↓)</span></div>
+              <div class="text-sm opacity-80">Sessions</div>
+            </div>
+            <i data-lucide="more-vertical" class="w-4 h-4 opacity-70"></i>
+          </div>
+          <div class="h-12 w-full">
+            <canvas id="cardChart4"></canvas>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Traffic Main Chart Card -->
+      <div class="bg-white rounded border border-slate-200 shadow-sm p-6">
+        <div class="flex flex-col md:flex-row md:items-center justify-between pb-4 gap-4">
+          <div>
+            <h2 class="text-xl font-bold text-slate-800">Traffic</h2>
+            <p class="text-xs text-slate-400">January - July 2023</p>
+          </div>
+          <div class="flex items-center space-x-2">
+            <div class="inline-flex rounded-md shadow-sm">
+              <button class="px-3 py-1.5 text-xs font-medium text-slate-700 bg-white border border-slate-300 rounded-l-md hover:bg-slate-50">Day</button>
+              <button class="px-3 py-1.5 text-xs font-medium text-white bg-slate-600 border border-slate-600">Month</button>
+              <button class="px-3 py-1.5 text-xs font-medium text-slate-700 bg-white border border-slate-300 rounded-r-md hover:bg-slate-50">Year</button>
+            </div>
+            <button class="p-1.5 bg-blue-600 text-white rounded shadow hover:bg-blue-700"><i data-lucide="download" class="w-4 h-4"></i></button>
+          </div>
+        </div>
+
+        <!-- Canvas -->
+        <div class="h-72 w-full">
+          <canvas id="mainChart"></canvas>
+        </div>
+
+        <!-- Bottom Stat Highlights -->
+        <div class="grid grid-cols-2 md:grid-cols-5 gap-4 pt-6 border-t border-slate-100 text-center text-xs">
+          <div>
+            <div class="text-slate-400">Visits</div>
+            <div class="font-bold text-slate-700 text-sm">29.703 Users (40%)</div>
+            <div class="w-full bg-slate-200 h-1.5 rounded-full mt-2"><div class="bg-emerald-500 h-1.5 rounded-full" style="width: 40%"></div></div>
+          </div>
+          <div>
+            <div class="text-slate-400">Unique</div>
+            <div class="font-bold text-slate-700 text-sm">24.093 Users (20%)</div>
+            <div class="w-full bg-slate-200 h-1.5 rounded-full mt-2"><div class="bg-blue-500 h-1.5 rounded-full" style="width: 20%"></div></div>
+          </div>
+          <div>
+            <div class="text-slate-400">Pageviews</div>
+            <div class="font-bold text-slate-700 text-sm">78.706 Views (60%)</div>
+            <div class="w-full bg-slate-200 h-1.5 rounded-full mt-2"><div class="bg-yellow-500 h-1.5 rounded-full" style="width: 60%"></div></div>
+          </div>
+          <div>
+            <div class="text-slate-400">New Users</div>
+            <div class="font-bold text-slate-700 text-sm">22.123 Users (80%)</div>
+            <div class="w-full bg-slate-200 h-1.5 rounded-full mt-2"><div class="bg-red-500 h-1.5 rounded-full" style="width: 80%"></div></div>
+          </div>
+          <div class="col-span-2 md:col-span-1">
+            <div class="text-slate-400">Bounce Rate</div>
+            <div class="font-bold text-slate-700 text-sm">Average Rate (40.15%)</div>
+            <div class="w-full bg-slate-200 h-1.5 rounded-full mt-2"><div class="bg-indigo-500 h-1.5 rounded-full" style="width: 40%"></div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Social Cards -->
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <!-- Facebook -->
+        <div class="bg-white rounded border border-slate-200 overflow-hidden shadow-sm">
+          <div class="bg-[#3b5998] h-20 flex items-center justify-center text-white">
+            <i data-lucide="facebook" class="w-10 h-10"></i>
+          </div>
+          <div class="grid grid-cols-2 text-center py-3 divide-x divide-slate-200 text-sm">
+            <div><div class="font-bold text-slate-800">89K</div><div class="text-xs text-slate-400 uppercase">Friends</div></div>
+            <div><div class="font-bold text-slate-800">459</div><div class="text-xs text-slate-400 uppercase">Feeds</div></div>
+          </div>
+        </div>
+
+        <!-- Twitter -->
+        <div class="bg-white rounded border border-slate-200 overflow-hidden shadow-sm">
+          <div class="bg-[#00acd6] h-20 flex items-center justify-center text-white">
+            <i data-lucide="twitter" class="w-10 h-10"></i>
+          </div>
+          <div class="grid grid-cols-2 text-center py-3 divide-x divide-slate-200 text-sm">
+            <div><div class="font-bold text-slate-800">973k</div><div class="text-xs text-slate-400 uppercase">Followers</div></div>
+            <div><div class="font-bold text-slate-800">1.792</div><div class="text-xs text-slate-400 uppercase">Tweets</div></div>
+          </div>
+        </div>
+
+        <!-- LinkedIn -->
+        <div class="bg-white rounded border border-slate-200 overflow-hidden shadow-sm">
+          <div class="bg-[#4875b4] h-20 flex items-center justify-center text-white">
+            <i data-lucide="linkedin" class="w-10 h-10"></i>
+          </div>
+          <div class="grid grid-cols-2 text-center py-3 divide-x divide-slate-200 text-sm">
+            <div><div class="font-bold text-slate-800">500</div><div class="text-xs text-slate-400 uppercase">Contacts</div></div>
+            <div><div class="font-bold text-slate-800">1.292</div><div class="text-xs text-slate-400 uppercase">Feeds</div></div>
+          </div>
+        </div>
+
+        <!-- Calendar/Events -->
+        <div class="bg-white rounded border border-slate-200 overflow-hidden shadow-sm">
+          <div class="bg-[#f9b115] h-20 flex items-center justify-center text-white">
+            <i data-lucide="calendar" class="w-10 h-10"></i>
+          </div>
+          <div class="grid grid-cols-2 text-center py-3 divide-x divide-slate-200 text-sm">
+            <div><div class="font-bold text-slate-800">12+</div><div class="text-xs text-slate-400 uppercase">Events</div></div>
+            <div><div class="font-bold text-slate-800">4</div><div class="text-xs text-slate-400 uppercase">Meetings</div></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Traffic & Sales Details Table -->
+      <div class="bg-white rounded border border-slate-200 shadow-sm overflow-hidden">
+        <div class="p-4 border-b border-slate-100 font-semibold text-slate-700">Traffic & Sales</div>
+        
+        <!-- Bar Charts Breakdown Section -->
+        <div class="p-6 grid grid-cols-1 md:grid-cols-2 gap-8 border-b border-slate-100">
+          
+          <!-- Left side days breakdown -->
+          <div class="space-y-3 text-xs">
+            <div class="grid grid-cols-4 pb-2 text-slate-400 font-medium">
+              <div>New Clients</div>
+              <div>Recurring Clients</div>
+              <div>Pageviews</div>
+              <div>Organic</div>
+            </div>
+            <div class="grid grid-cols-4 font-bold text-sm text-slate-700 border-b pb-2">
+              <div>9,123</div>
+              <div>22,643</div>
+              <div>78,623</div>
+              <div>49,123</div>
+            </div>
+
+            <!-- Horizontal Bars for Days -->
+            <div class="space-y-2 pt-2">
+              <div class="flex items-center"><span class="w-16 text-slate-500">Monday</span><div class="flex-1 bg-slate-100 h-2 rounded overflow-hidden flex"><div class="bg-blue-500 h-full" style="width: 30%"></div><div class="bg-red-500 h-full" style="width: 50%"></div></div></div>
+              <div class="flex items-center"><span class="w-16 text-slate-500">Tuesday</span><div class="flex-1 bg-slate-100 h-2 rounded overflow-hidden flex"><div class="bg-blue-500 h-full" style="width: 40%"></div><div class="bg-red-500 h-full" style="width: 60%"></div></div></div>
+              <div class="flex items-center"><span class="w-16 text-slate-500">Wednesday</span><div class="flex-1 bg-slate-100 h-2 rounded overflow-hidden flex"><div class="bg-blue-500 h-full" style="width: 20%"></div><div class="bg-red-500 h-full" style="width: 45%"></div></div></div>
+              <div class="flex items-center"><span class="w-16 text-slate-500">Thursday</span><div class="flex-1 bg-slate-100 h-2 rounded overflow-hidden flex"><div class="bg-blue-500 h-full" style="width: 35%"></div><div class="bg-red-500 h-full" style="width: 55%"></div></div></div>
+              <div class="flex items-center"><span class="w-16 text-slate-500">Friday</span><div class="flex-1 bg-slate-100 h-2 rounded overflow-hidden flex"><div class="bg-blue-500 h-full" style="width: 25%"></div><div class="bg-red-500 h-full" style="width: 45%"></div></div></div>
+              <div class="flex items-center"><span class="w-16 text-slate-500">Saturday</span><div class="flex-1 bg-slate-100 h-2 rounded overflow-hidden flex"><div class="bg-blue-500 h-full" style="width: 45%"></div><div class="bg-red-500 h-full" style="width: 50%"></div></div></div>
+              <div class="flex items-center"><span class="w-16 text-slate-500">Sunday</span><div class="flex-1 bg-slate-100 h-2 rounded overflow-hidden flex"><div class="bg-blue-500 h-full" style="width: 15%"></div><div class="bg-red-500 h-full" style="width: 40%"></div></div></div>
+            </div>
+          </div>
+
+          <!-- Right side traffic sources -->
+          <div class="space-y-4 text-xs">
+            <div>
+              <div class="flex justify-between mb-1"><span class="text-slate-600 flex items-center"><i data-lucide="user" class="w-3.5 h-3.5 mr-1"></i> Male</span><span class="font-bold">53%</span></div>
+              <div class="bg-slate-100 h-2 rounded"><div class="bg-yellow-500 h-full rounded" style="width: 53%"></div></div>
+            </div>
+            <div>
+              <div class="flex justify-between mb-1"><span class="text-slate-600 flex items-center"><i data-lucide="user" class="w-3.5 h-3.5 mr-1"></i> Female</span><span class="font-bold">43%</span></div>
+              <div class="bg-slate-100 h-2 rounded"><div class="bg-yellow-500 h-full rounded" style="width: 43%"></div></div>
+            </div>
+
+            <div class="pt-2 space-y-3">
+              <div>
+                <div class="flex justify-between mb-1"><span class="text-slate-600 font-medium">Organic Search</span><span class="font-bold">191,235 <span class="text-slate-400 font-normal">(56%)</span></span></div>
+                <div class="bg-slate-100 h-2 rounded"><div class="bg-emerald-500 h-full rounded" style="width: 56%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1"><span class="text-slate-600 font-medium">Facebook</span><span class="font-bold">51,223 <span class="text-slate-400 font-normal">(15%)</span></span></div>
+                <div class="bg-slate-100 h-2 rounded"><div class="bg-emerald-500 h-full rounded" style="width: 15%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1"><span class="text-slate-600 font-medium">Twitter</span><span class="font-bold">37,564 <span class="text-slate-400 font-normal">(11%)</span></span></div>
+                <div class="bg-slate-100 h-2 rounded"><div class="bg-emerald-500 h-full rounded" style="width: 11%"></div></div>
+              </div>
+              <div>
+                <div class="flex justify-between mb-1"><span class="text-slate-600 font-medium">LinkedIn</span><span class="font-bold">27,319 <span class="text-slate-400 font-normal">(8%)</span></span></div>
+                <div class="bg-slate-100 h-2 rounded"><div class="bg-emerald-500 h-full rounded" style="width: 8%"></div></div>
+              </div>
+            </div>
+          </div>
+
+        </div>
+
+        <!-- Users Table -->
+        <div class="overflow-x-auto">
+          <table class="w-full text-left text-xs text-slate-600">
+            <thead class="bg-slate-50 border-b border-slate-200 uppercase text-[11px] font-semibold text-slate-400">
+              <tr>
+                <th class="py-3 px-4 w-12 text-center"><i data-lucide="users" class="w-4 h-4 inline"></i></th>
+                <th class="py-3 px-4">User</th>
+                <th class="py-3 px-4">Country</th>
+                <th class="py-3 px-4">Usage</th>
+                <th class="py-3 px-4">Payment Method</th>
+                <th class="py-3 px-4">Activity</th>
+              </tr>
+            </thead>
+            <tbody class="divide-y divide-slate-100">
+              <tr>
+                <td class="py-3 px-4 text-center">
+                  <img src="https://i.pravatar.cc/40?img=1" class="w-8 h-8 rounded-full inline" alt="User">
+                </td>
+                <td class="py-3 px-4">
+                  <div class="font-semibold text-slate-800">Yiorgos Avraamu</div>
+                  <div class="text-[11px] text-slate-400">New | Registered: Jan 1, 2023</div>
+                </td>
+                <td class="py-3 px-4"><span class="text-base">🇺🇸</span></td>
+                <td class="py-3 px-4">
+                  <div class="font-bold mb-1">50%</div>
+                  <div class="w-24 bg-slate-200 h-1.5 rounded"><div class="bg-emerald-500 h-full rounded" style="width: 50%"></div></div>
+                  <div class="text-[10px] text-slate-400 mt-1">Jun 11, 2023 - Jul 10, 2023</div>
+                </td>
+                <td class="py-3 px-4"><i data-lucide="credit-card" class="w-5 h-5 text-slate-600"></i></td>
+                <td class="py-3 px-4"><div class="text-slate-400">Last login</div><div class="font-semibold text-slate-700">10 sec ago</div></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 text-center">
+                  <img src="https://i.pravatar.cc/40?img=2" class="w-8 h-8 rounded-full inline" alt="User">
+                </td>
+                <td class="py-3 px-4">
+                  <div class="font-semibold text-slate-800">Avram Tarasios</div>
+                  <div class="text-[11px] text-slate-400">Recurring | Registered: Jan 1, 2023</div>
+                </td>
+                <td class="py-3 px-4"><span class="text-base">🇧🇷</span></td>
+                <td class="py-3 px-4">
+                  <div class="font-bold mb-1">22%</div>
+                  <div class="w-24 bg-slate-200 h-1.5 rounded"><div class="bg-blue-500 h-full rounded" style="width: 22%"></div></div>
+                  <div class="text-[10px] text-slate-400 mt-1">Jun 11, 2023 - Jul 10, 2023</div>
+                </td>
+                <td class="py-3 px-4"><i data-lucide="credit-card" class="w-5 h-5 text-slate-600"></i></td>
+                <td class="py-3 px-4"><div class="text-slate-400">Last login</div><div class="font-semibold text-slate-700">5 minutes ago</div></td>
+              </tr>
+              <tr>
+                <td class="py-3 px-4 text-center">
+                  <img src="https://i.pravatar.cc/40?img=3" class="w-8 h-8 rounded-full inline" alt="User">
+                </td>
+                <td class="py-3 px-4">
+                  <div class="font-semibold text-slate-800">Quintin Ed</div>
+                  <div class="text-[11px] text-slate-400">New | Registered: Jan 1, 2023</div>
+                </td>
+                <td class="py-3 px-4"><span class="text-base">🇮🇳</span></td>
+                <td class="py-3 px-4">
+                  <div class="font-bold mb-1">74%</div>
+                  <div class="w-24 bg-slate-200 h-1.5 rounded"><div class="bg-yellow-500 h-full rounded" style="width: 74%"></div></div>
+                  <div class="text-[10px] text-slate-400 mt-1">Jun 11, 2023 - Jul 10, 2023</div>
+                </td>
+                <td class="py-3 px-4"><i data-lucide="credit-card" class="w-5 h-5 text-slate-600"></i></td>
+                <td class="py-3 px-4"><div class="text-slate-400">Last login</div><div class="font-semibold text-slate-700">1 hour ago</div></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="mt-auto px-6 py-4 bg-white border-t border-slate-200 flex flex-col sm:flex-row justify-between text-xs text-slate-500 gap-2">
+      <div>CoreUI © 2025 creativeLabs.</div>
+      <div>Powered by <a href="#" class="text-blue-600 hover:underline">CoreUI React Admin & Dashboard Template</a></div>
+    </footer>
+
+  </div>
+
+  <!-- Scripts -->
+  <script>
+    // Initialize Lucide Icons
+    lucide.createIcons();
+
+    <!-- Sidebar Toggle -->
+    const sidebar = document.getElementById('sidebar');
+    document.getElementById('menu-btn').addEventListener('click', () => {
+      sidebar.classList.toggle('-translate-x-full');
+    });
+
+    // Small Sparkline Charts Setup
+    const sparklineOptions = {
+      responsive: true,
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { x: { display: false }, y: { display: false } },
+      elements: { point: { radius: 0 } }
+    };
+
+    new Chart(document.getElementById('cardChart1'), {
+      type: 'line',
+      data: {
+        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        datasets: [{ data: [65, 59, 84, 84, 51, 55, 40], borderColor: 'rgba(255,255,255,0.8)', borderWidth: 2, fill: false }]
+      },
+      options: sparklineOptions
+    });
+
+    new Chart(document.getElementById('cardChart2'), {
+      type: 'line',
+      data: {
+        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        datasets: [{ data: [1, 18, 9, 17, 34, 22, 11], borderColor: 'rgba(255,255,255,0.8)', borderWidth: 2, fill: false }]
+      },
+      options: sparklineOptions
+    });
+
+    new Chart(document.getElementById('cardChart3'), {
+      type: 'line',
+      data: {
+        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S'],
+        datasets: [{ data: [78, 81, 80, 45, 34, 12, 40], borderColor: 'rgba(255,255,255,0.8)', borderWidth: 2, fill: false }]
+      },
+      options: sparklineOptions
+    });
+
+    new Chart(document.getElementById('cardChart4'), {
+      type: 'bar',
+      data: {
+        labels: ['M', 'T', 'W', 'T', 'F', 'S', 'S', 'M', 'T', 'W', 'T', 'F'],
+        datasets: [{ data: [78, 81, 80, 45, 34, 12, 40, 85, 65, 23, 12, 98], backgroundColor: 'rgba(255,255,255,0.6)' }]
+      },
+      options: sparklineOptions
+    });
+
+    // Main Traffic Multi-line Chart
+    new Chart(document.getElementById('mainChart'), {
+      type: 'line',
+      data: {
+        labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
+        datasets: [
+          {
+            label: 'Visits',
+            data: [75, 85, 40, 30, 90, 20, 80],
+            borderColor: '#3b82f6',
+            borderWidth: 2,
+            tension: 0.4,
+            pointRadius: 0
+          },
+          {
+            label: 'Unique',
+            data: [25, 45, 20, 70, 30, 60, 45],
+            borderColor: '#10b981',
+            borderWidth: 2,
+            tension: 0.4,
+            pointRadius: 0
+          },
+          {
+            label: 'Target',
+            data: [65, 65, 65, 65, 65, 65, 65],
+            borderColor: '#ef4444',
+            borderWidth: 1,
+            borderDash: [5, 5],
+            pointRadius: 0
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: { legend: { display: false } },
+        scales: {
+          x: { grid: { display: false } },
+          y: { min: 0, max: 250, ticks: { stepSize: 50 } }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

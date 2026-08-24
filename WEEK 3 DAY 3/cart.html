@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping cart</title>
+
+    <style>
+        * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+   
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    color: #333;
+}
+
+header { 
+    background-color: #222;
+    color: white;
+    text-align: center;
+    padding: 25px;
+}
+
+header h1 {
+    margin-bottom: 8px;
+}
+
+main {
+    width: 90%;
+    max-width: 1000px;
+    margin: 30px auto;
+}
+
+.products h2,
+.cart h2 {
+    margin-bottom: 20px;
+}
+
+.product-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+}
+
+.product {
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    text-align: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.product h3 {
+    margin-bottom: 10px;
+}
+
+.price {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+
+button {
+    border: none;
+    background-color: #007bff;
+    color: white;
+    padding: 10px 15px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+button:hover {
+    background-color: #0056b3;
+}
+
+.cart {
+    background-color: white;
+    margin-top: 40px;
+    padding: 25px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 0;
+    border-bottom: 1px solid #ddd;
+    gap: 10px;
+}
+
+.cart-item-info {
+    flex: 1;
+}
+
+.cart-item-info h3 {
+   margin-bottom: 5px;
+}
+
+.quantity-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.quantity-controls button {
+    padding: 5px 10px;
+}
+
+.remove-btn {
+    background-color: #dc3545;
+}
+
+.remove-btn:hover {
+    background-color: #a71d2a;
+}
+
+.cart-total {
+    text-align: right;
+    margin-top: 20px;
+}
+
+#total {
+    color: #007bff;
+}
+
+.empty {
+    text-align: center;
+    color: #777;
+    padding: 20px;
+}
+
+@media (max-width: 600px) {
+    .cart-item {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .cart-total {
+          text-align: left;
+    }
+}
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>🛍️ My Shop</h1>
+        <p>Simple JavaScript Shopping Cart</p>
+    </header>
+
+    <main>
+
+        <!-- Products -->
+        <section class="products">
+            <h2>Products</h2>
+
+            <div class="product-container">
+
+                <div class="product">
+                    <h3>T-Shirt</h3>
+                    <p class="price">5000 FCFA</p>
+                    <button onclick="addToCart('T-Shirt', 5000)">
+                        Add to Cart
+                    </button>
+                </div>
+
+                <div class="product">
+                    <h3>Shoes</h3>
+                    <p class="price">15000 FCFA</p>
+                    <button onclick="addToCart('Shoes', 15000)">
+                        Add to Cart
+                    </button>
+                </div>
+
+                <div class="product">
+                    <h3>Bag</h3>
+                    <p class="price">10000 FCFA</p>
+                    <button onclick="addToCart('Bag', 10000)">
+                        Add to Cart
+                    </button>
+                </div>
+
+                <div class="product">
+                    <h3>Cap</h3>
+                    <p class="price">3000 FCFA</p>
+                    <button onclick="addToCart('Cap', 3000)">
+                        Add to Cart
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- Shopping Cart -->
+        <section class="cart">
+            <h2>🛒 Shopping Cart</h2>
+
+            <div id="cartItems">
+                <p class="empty">Your cart is empty.</p>
+            </div>
+
+            <div class="cart-total">
+                <h3>Total: <span id="total">0</span> FCFA</h3>
+            </div>
+        </section>
+
+    </main>
+
+    <script>
+        // Shopping cart array
+let cart = [];
+
+// Add product to cart
+function addToCart(name, price) {
+
+    // Check if product already exists
+    let existingProduct = cart.find(function(item) {
+        return item.name === name;
+    });
+
+    if (existingProduct) {
+
+        // Increase quantity
+        existingProduct.quantity++;
+
+    } else {
+
+        // Add new product
+        cart.push({
+            name: name,
+            price: price,
+            quantity: 1
+        });
+    }
+
+    displayCart();
+}
+
+
+// Display cart
+function displayCart() {
+
+    let cartItems = document.getElementById("cartItems");
+    let totalElement = document.getElementById("total");
+
+    // Clear cart display
+    cartItems.innerHTML = "";
+
+    // Check if cart is empty
+    if (cart.length === 0) {
+
+        cartItems.innerHTML = `
+            <p class="empty">Your cart is empty.</p>
+        `;
+
+        totalElement.textContent = "0";
+        return;
+    }
+
+    let total = 0;
+
+    // Display every item
+    cart.forEach(function(item, index) {
+
+        let itemTotal = item.price * item.quantity;
+
+        total += itemTotal;
+
+        cartItems.innerHTML += `
+            <div class="cart-item">
+
+                <div class="cart-item-info">
+                    <h3>${item.name}</h3>
+                    <p>${item.price} FCFA each</p>
+                    <p>
+                        Subtotal:
+                        ${itemTotal} FCFA
+                    </p>
+                </div>
+
+                <div class="quantity-controls">
+
+                    <button onclick="decreaseQuantity(${index})">
+                        −
+                    </button>
+
+                    <span>${item.quantity}</span>
+
+                    <button onclick="increaseQuantity(${index})">
+                        +
+                    </button>
+
+                </div>
+
+                <button
+                    class="remove-btn"
+                    onclick="removeFromCart(${index})">
+                    Remove
+                </button>
+
+            </div>
+        `;
+    });
+
+    // Display total
+    totalElement.textContent = total;
+}
+
+
+// Increase quantity
+function increaseQuantity(index) {
+
+    cart[index].quantity++;
+
+    displayCart();
+}
+
+
+// Decrease quantity
+function decreaseQuantity(index) {
+
+    if (cart[index].quantity > 1) {
+
+        cart[index].quantity--;
+
+    } else {
+
+        // Remove item if quantity reaches 0
+        cart.splice(index, 1);
+    }
+
+    displayCart();
+}
+
+
+// Remove item completely
+function removeFromCart(index) {
+
+    cart.splice(index, 1);
+
+    displayCart();
+}
+    </script>
+
+</body>
+</html>
